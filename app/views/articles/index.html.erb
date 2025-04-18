@@ -1,7 +1,5 @@
 <h1>Articles</h1>
 
-<%= link_to 'New Article', new_article_path, class: 'btn btn-primary' %>
-
 <table>
   <thead>
     <tr>
@@ -19,11 +17,6 @@
         <td><%= article.author %></td>
         <td><%= article.category %></td>
         <td><%= article.published_at&.strftime('%B %d, %Y') %></td>
-        <td>
-          <%= link_to 'Show', article_path(article), class: 'btn btn-info' %>
-          <%= link_to 'Edit', edit_article_path(article), class: 'btn btn-warning' %>
-          <%= link_to 'Delete', article_path(article), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-        </td>
       </tr>
     <% end %>
   </tbody>
