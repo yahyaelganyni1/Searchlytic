@@ -3,6 +3,8 @@ class CreateSearchLogs < ActiveRecord::Migration[8.0]
     create_table :search_logs do |t|
       t.string :user_ip
       t.text :search_query
+      t.string :session_id
+      t.boolean :is_final_query, default: false
 
       t.timestamps
     end

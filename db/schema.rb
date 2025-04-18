@@ -16,7 +16,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_18_112503) do
 
   create_table "articles", force: :cascade do |t|
     t.string "title", null: false
-    t.text "content", null: false
     t.string "author"
     t.string "category"
     t.json "tags"
@@ -28,6 +27,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_18_112503) do
   create_table "search_logs", force: :cascade do |t|
     t.string "user_ip"
     t.text "search_query"
+    t.string "session_id"
+    t.boolean "is_final_query", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["search_query"], name: "index_search_logs_on_search_query"

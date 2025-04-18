@@ -5,7 +5,6 @@ export default class extends Controller {
 
     connect() {
         console.log("Search controller connected")
-        // The suggestions target is now in the HTML, no need to create it
     }
 
     input(event) {
