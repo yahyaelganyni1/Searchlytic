@@ -1,4 +1,4 @@
-<div class="search-container">
+<div class="search-container" data-controller="search">
   <%= form_with url: articles_path, method: :get, class: "search-form" do |form| %>
     <div class="search-input-group">
       <%= form.text_field :query, 
@@ -6,8 +6,12 @@
           class: "search-input",
           id: "search-input",
           autocomplete: "off",
-          data: { controller: "search" } %>
+          data: { 
+            search_target: "input",
+            action: "input->search#input"
+          } %>
       <%= form.submit "Search now", class: "search-button" %>
+      <div class="search-suggestions" data-search-target="suggestions" style="display: none;"></div>
     </div>
   <% end %>
 </div>
