@@ -1,5 +1,6 @@
 class SearchLogsController < ApplicationController
   # before_action :set_search_log, only: [ :index, :show, :create ]
+  skip_before_action :verify_authenticity_token
 
   # GET /search_logs/search
   def search
@@ -43,14 +44,24 @@ class SearchLogsController < ApplicationController
   # POST /search_logs
   def create
     @search_log = SearchLog.log_search(
-      params[:search_query],
-      request.remote_ip,
-      params[:session_id]
+      search_log_params[:search_query],
+      search_log_params[:user_ip],
+      search_log_params[:session_id],
+      search_log_params[:is_final_query]
     )
-    if @search_log.persisted?
+    if @search_log.save
       render json: @search_log, status: :created
     else
-      render json: { error: "Failed to log search" }, status: :unprocessable_entity
+      render json: @search_log.errors, status: :unprocessable_entity
     end
+  end
+
+  private
+
+  def search_log_params
+    search_params = params.require(:search_log).permit(:search_query, :is_final_query)
+    search_params[:user_ip] = params[:user_ip] || request.remote_ip
+    search_params[:session_id] = request.session_options[:id]
+    search_params
   end
 end

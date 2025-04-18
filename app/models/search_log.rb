@@ -17,8 +17,9 @@ class SearchLog < ApplicationRecord
   end
 
   # Class methods
-  def self.log_search(query, user_ip, session_id = nil)
-    create(search_query: query, user_ip: user_ip, session_id: session_id)
+  def self.log_search(query, user_ip, session_id, is_final_query = false)
+    create(search_query: query, user_ip: user_ip, session_id: session_id || nil, is_final_query: is_final_query)
+
   rescue => e
     Rails.logger.error("Failed to log search: #{e.message}")
     nil
