@@ -29,3 +29,56 @@ body {
   margin: 0 auto;
   padding: 0 15px;
 }
+
+/* Article cards styling */
+.articles-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.article-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.article-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.article-title {
+  margin: 0 0 10px 0;
+  color: #2a2a2a;
+  font-size: 1.4rem;
+}
+
+.article-author {
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.article-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.article-category {
+  background-color: #e9ecef;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: #495057;
+}
+
+.article-date {
+  font-size: 0.85rem;
+  color: #6c757d;
+}

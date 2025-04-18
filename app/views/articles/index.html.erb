@@ -1,21 +1,12 @@
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Category</th>
-      <th>Published At</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @articles.each do |article| %>
-      <tr>
-        <td><%= article.title %></td>
-        <td><%= article.author %></td>
-        <td><%= article.category %></td>
-        <td><%= article.published_at&.strftime('%B %d, %Y') %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="articles-container">
+  <% @articles.each do |article| %>
+    <div class="article-card">
+      <h3 class="article-title"><%= article.title %></h3>
+      <div class="article-author"><%= article.author %></div>
+      <div class="article-meta">
+        <span class="article-category"><%= article.category %></span>
+        <div class="article-date"><%= article.published_at&.strftime('%B %d, %Y') %></div>
+      </div>
+    </div>
+  <% end %>
+</div>
