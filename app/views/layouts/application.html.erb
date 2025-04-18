@@ -23,6 +23,10 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'shared/header' %>
+    
+    <main class="site-content">
+      <%= yield %>
+    </main>
   </body>
 </html>

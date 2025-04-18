@@ -7,4 +7,25 @@
  * depending on specificity.
  *
  * Consider organizing styles into separate files for maintainability.
+ *
+ *= require_self
+ *= require header
  */
+
+/* Base application styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f8f9fa;
+}
+
+/* Container for content */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
