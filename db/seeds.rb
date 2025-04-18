@@ -25,4 +25,17 @@ ARTICLE_CATEGORIES = [ 'Technology', 'Science', 'Politics', 'Health', 'Business'
   )
 end
 
+# Create 30 fake search logs
+30.times do
+  SearchLog.create!(
+    search_query: Faker::Book.title,
+    user_ip: Faker::Internet.ip_v4_address,
+    is_final_query: [ true, false ].sample,
+    session_id: SecureRandom.hex(10),
+    created_at: Faker::Time.between(from: 14.days.ago, to: Time.now)
+  )
+end
+
+puts "Created 30 search logs with realistic data"
+
 puts "Created 50 articles with additional fields and realistic categories"
