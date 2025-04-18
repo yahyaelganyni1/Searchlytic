@@ -1,8 +1,13 @@
 <div class="search-container">
-  <form class="search-form">
+  <%= form_with url: articles_path, method: :get, class: "search-form" do |form| %>
     <div class="search-input-group">
-      <input type="text" placeholder="Search articles..." class="search-input">
-      <button type="submit" class="search-button">Search now</button>
+      <%= form.text_field :query, 
+          placeholder: "Search articles...", 
+          class: "search-input",
+          id: "search-input",
+          autocomplete: "off",
+          data: { controller: "search" } %>
+      <%= form.submit "Search now", class: "search-button" %>
     </div>
-  </form>
+  <% end %>
 </div>
