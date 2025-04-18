@@ -33,7 +33,9 @@ class SearchLogsController < ApplicationController
   # GET /search_logs/final_logs
   def final_logs
     user_ip = params[:user_ip] || request.remote_ip
-    @final_logs = SearchLog.for_user(user_ip).final_queries.recent
+    # for now return all for test purposes
+    @final_logs = SearchLog.all
+                      .final_queries
 
     render json: @final_logs, status: :ok
   end
