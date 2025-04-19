@@ -1,7 +1,7 @@
 <div class="search-container" data-controller="search">
-  <%= form_with url: articles_path, method: :get, class: "search-form" do |form| %>
+    <%= form_with url: articles_path, method: :get, class: "search-form", data: { action: "submit->search#search" } do |form| %>
     <div class="search-input-group">
-      <%= form.text_field :query, 
+        <%= form.text_field :query, 
           placeholder: "Search articles...", 
           class: "search-input",
           id: "search-input",
@@ -10,8 +10,8 @@
             search_target: "input",
             action: "input->search#input"
           } %>
-      <%= form.submit "Search now", class: "search-button" %>
-      <div class="search-suggestions" data-search-target="suggestions" style="display: none;"></div>
+        <%= form.submit "Search now", class: "search-button" %>
+        <div class="search-suggestions" data-search-target="suggestions" style="display: none;"></div>
     </div>
-  <% end %>
+    <% end %>
 </div>

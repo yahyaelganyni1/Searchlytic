@@ -22,6 +22,24 @@ export default class extends Controller {
         this.logSearch(query, false)
     }
 
+    // Handle form submission for search
+    search(event) {
+        event.preventDefault()
+        const query = this.inputTarget.value.trim()
+
+        if (query.length > 0) {
+            // Log the search as a final query
+            this.logSearch(query, true)
+            // Redirect to the articles page with the query
+            this.performSearch(query)
+        }
+    }
+
+    // Method to navigate to articles page with search query
+    performSearch(query) {
+        window.location.href = `/articles?query=${encodeURIComponent(query)}`
+    }
+
     // Add a method to log searches to the server
     async logSearch(query, isFinalQuery = false) {
         try {
@@ -113,5 +131,8 @@ export default class extends Controller {
 
         // Log the selected suggestion as a final query
         this.logSearch(suggestion, true)
+
+        // Perform the search with the selected suggestion
+        this.performSearch(suggestion)
     }
 }
