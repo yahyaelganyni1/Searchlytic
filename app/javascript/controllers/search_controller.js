@@ -16,22 +16,33 @@ export default class extends Controller {
             return
         }
 
-        // Dummy data for suggestions
-        const dummyData = [
-            "In a Dry Season",
-            "In a Dark Wood",
-            "In a Different Light",
-            "In a Different Place",
-            "Fair Stood the Wind for France"
-        ]
+        this.fetchSearchSuggestions(query)
+    }
 
-        // Filter suggestions based on query
-        const filteredSuggestions = dummyData.filter(item =>
-            item.toLowerCase().includes(query.toLowerCase())
-        )
+    async fetchSearchSuggestions(query) {
+        try {
+            // Fetch suggestions from the search_logs/final_logs endpoint
+            const response = await fetch('/search_logs/final_logs')
+            if (!response.ok) {
+                throw new Error('Network response was not ok')
+            }
 
-        console.log("Filtered suggestions:", filteredSuggestions)
-        this.showSuggestions(filteredSuggestions)
+            const searchLogs = await response.json()
+
+            // Extract search queries from the logs
+            const suggestions = searchLogs.map(log => log.search_query)
+
+            // Filter suggestions based on query
+            const filteredSuggestions = suggestions.filter(item =>
+                item && item.toLowerCase().includes(query.toLowerCase())
+            )
+
+            console.log("Filtered suggestions:", filteredSuggestions)
+            this.showSuggestions(filteredSuggestions)
+        } catch (error) {
+            console.error("Error fetching suggestions:", error)
+            this.hideSuggestions()
+        }
     }
 
     showSuggestions(suggestions) {
