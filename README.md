@@ -1,24 +1,44 @@
-# README
+# Searchlytic
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Searchlytic is a Rails application designed to track, analyze, and optimize search behavior within your web application. It provides insights into user search patterns and helps improve search functionality through analytics.
 
-Things you may want to cover:
+## Core Features
 
-* Ruby version
+- **Search Query Tracking**: Logs all search queries performed by users, including partial and final queries
+- **Search Analytics**: Tracks user search patterns and provides analytics on popular search terms
+- **Search Suggestions**: Offers search suggestions based on previous successful searches
+- **Query Scoring**: Implements a scoring system to identify and highlight the most effective search terms
 
-* System dependencies
+## How It Works
 
-* Configuration
+1. The application logs every search attempt, capturing:
+   - Search queries
+   - User IP address
+   - Session information
+   - Whether the query was a final submission
 
-* Database creation
+2. Search logs are tracked with a scoring mechanism that:
+   - Increments scores for repeated queries
+   - Identifies which searches lead to successful results
+   - Highlights trending search terms
 
-* Database initialization
+3. The system provides an API for:
+   - Logging search queries
+   - Retrieving search suggestions
+   - Analyzing search patterns
 
-* How to run the test suite
+## Technical Architecture
 
-* Services (job queues, cache servers, search engines, etc.)
+Searchlytic is built on Ruby on Rails and includes:
 
-* Deployment instructions
+- **Models**: Articles and SearchLogs to track content and search behavior
+- **Controllers**: Handle search queries and log user search patterns
+- **Frontend Integration**: JavaScript controller for real-time search suggestions
 
-* ...
+## Getting Started
+
+Instructions for setting up and deploying the Searchlytic application will be added here.
+
+## License
+
+Information about licensing will be added here.
