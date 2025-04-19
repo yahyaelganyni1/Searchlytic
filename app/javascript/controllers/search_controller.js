@@ -17,6 +17,44 @@ export default class extends Controller {
         }
 
         this.fetchSearchSuggestions(query)
+
+        // Log the search query (not as a final query)
+        this.logSearch(query, false)
+    }
+
+    // Add a method to log searches to the server
+    async logSearch(query, isFinalQuery = false) {
+        try {
+            const response = await fetch('/search_logs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-Token': this.getCSRFToken()
+                },
+                body: JSON.stringify({
+                    search_log: {
+                        search_query: query,
+                        is_final_query: isFinalQuery
+                    }
+                })
+            })
+
+            if (!response.ok) {
+                throw new Error('Failed to log search')
+            }
+
+            console.log('Search logged successfully')
+            return await response.json()
+        } catch (error) {
+            console.error('Error logging search:', error)
+        }
+    }
+
+    // Helper method to get CSRF token
+    getCSRFToken() {
+        const csrfMeta = document.querySelector('meta[name="csrf-token"]')
+        return csrfMeta ? csrfMeta.content : ''
     }
 
     async fetchSearchSuggestions(query) {
@@ -72,5 +110,8 @@ export default class extends Controller {
     selectSuggestion(suggestion) {
         this.inputTarget.value = suggestion
         this.hideSuggestions()
+
+        // Log the selected suggestion as a final query
+        this.logSearch(suggestion, true)
     }
 }
