@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_18_112503) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_19_064348) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -31,6 +31,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_18_112503) do
     t.boolean "is_final_query", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "score", default: 1
     t.index ["search_query"], name: "index_search_logs_on_search_query"
     t.index ["user_ip"], name: "index_search_logs_on_user_ip"
   end

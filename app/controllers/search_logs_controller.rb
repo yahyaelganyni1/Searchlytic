@@ -48,10 +48,11 @@ class SearchLogsController < ApplicationController
       search_log_params[:session_id],
       search_log_params[:is_final_query]
     )
-    if @search_log.save
+
+    if @search_log
       render json: @search_log, status: :created
     else
-      render json: @search_log.errors, status: :unprocessable_entity
+      render json: { error: "Failed to log search" }, status: :unprocessable_entity
     end
   end
 
