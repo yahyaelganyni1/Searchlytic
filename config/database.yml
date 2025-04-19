@@ -19,7 +19,6 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-
 development:
   <<: *default
   database: searchlytic_development
@@ -81,9 +80,12 @@ test:
 production:
   primary: &primary_production
     <<: *default
+    url: <%= ENV['DATABASE_URL'] %>
     database: searchlytic_production
-    username: searchlytic
-    password: <%= ENV["SEARCHLYTIC_DATABASE_PASSWORD"] %>
+    username: <%= ENV['POSTGRES_USERNAME'] || 'searchlytic' %>
+    password: <%= ENV['SEARCHLYTIC_DATABASE_PASSWORD'] || ENV['POSTGRES_PASSWORD'] %>
+    host: <%= ENV['POSTGRES_HOST'] %>
+    port: <%= ENV['POSTGRES_PORT'] || 5432 %>
   cache:
     <<: *primary_production
     database: searchlytic_production_cache
